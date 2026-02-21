@@ -1,0 +1,102 @@
+1) Vue globale : le pattern général
+
+Ton application suit ce modèle :
+
+✅ React (client)
+➡️ envoie des requêtes HTTP (fetch)
+➡️ vers NestJS (API REST)
+➡️ NestJS vérifie l’authentification (JWT)
+➡️ NestJS lit/écrit dans MongoDB
+➡️ NestJS renvoie du JSON
+➡️ React affiche les données dans les pages
+
+
+1) Vue globale : le pattern général
+
+Ton application suit ce modèle :
+
+✅ React (client)
+➡️ envoie des requêtes HTTP (fetch)
+➡️ vers NestJS (API REST)
+➡️ NestJS vérifie l’authentification (JWT)
+➡️ NestJS lit/écrit dans MongoDB
+➡️ NestJS renvoie du JSON
+➡️ React affiche les données dans les pages
+
+app.enableCors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+})
+
+
+✅ 2. Active les sessions express
+
+Pour ton CSRF Token (anti attaques).
+
+✅ 3. Active la validation globale (DTO)
+
+Pour sécuriser ton API.
+
+
+B) Le rôle de app.module.ts
+
+C’est le module racine.
+
+Il connecte :
+
+MongoDB (MongooseModule.forRoot(...))
+
+UsersModule
+
+AuthModule
+
+EventsModule
+
+C) Le rôle de UsersModule
+
+Il enregistre le modèle MongoDB :
+
+MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
+Puis expose UsersService aux autres modules.
+
+D) Le rôle de UsersController
+Il expose les routes :
+
+🔹 /users/me
+➡️ profil connecté (protégé par JWT)
+
+🔹 /users/:id
+➡️ profil public
+
+E) Le pattern Auth (JWT Guard)
+
+MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
+Puis expose UsersService aux autres modules.
+
+D) Le rôle de UsersController
+Il expose les routes :
+
+🔹 /users/me
+➡️ profil connecté (protégé par JWT)
+
+🔹 /users/:id
+➡️ profil public
+
+E) Le pattern Auth (JWT Guard)
+
+Quand tu mets :
+
+@UseGuards(JwtAuthGuard)
+
+
+Tu dis :
+
+✅ “Cette route n’est accessible que si le token JWT est valide.”
+
+Et NestJS injecte automatiquement :
+
+req.user = { userId: ... }
+
+3) Upload avatar : le pattern “static files + upload”
+
+

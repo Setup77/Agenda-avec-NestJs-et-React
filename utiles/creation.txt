@@ -1,0 +1,147 @@
+1. Architecture cible (vision globale)
+
+Avant d’installer quoi que ce soit, il est important de comprendre ce que nous allons construire.
+
+Stack technique retenue
+
+Backend API : NestJS (Node.js moderne, structuré, sécurisé)
+
+Base de données : MongoDB
+
+Frontend : HTML / JS (ou plus tard React/Vue si souhaité)
+
+Agenda : FullCalendar (plugin JS)
+
+Authentification : JWT (plus tard)
+
+Serveur local :
+
+Node.js pour le backend
+
+WAMP uniquement si vous avez déjà des projets PHP (non obligatoire pour NestJS)
+
+
+3. Installation des outils indispensables
+3.1 Installer NestJS CLI (outil principal)
+
+NestJS se crée via une CLI officielle.
+
+npm install -g @nestjs/cli
+
+
+Vérification :
+
+nest --version
+
+
+
+3.3 Vérifier MongoDB (serveur)
+
+MongoDB Compass est installé, mais il faut s’assurer que le serveur MongoDB tourne.
+
+Dans Compass :
+
+URI :
+
+mongodb://localhost:27017
+
+4. Création du projet backend NestJS
+
+Nous allons maintenant créer le serveur API.
+
+Dans un dossier de travail (ex : C:\projects) :
+
+nest new agenda-backend
+
+cd agenda-backend
+npm run start:dev
+
+						
+						5. Préparation de MongoDB dans NestJS
+
+Nous allons connecter NestJS à MongoDB (sans encore écrire de logique métier).
+
+Installation des dépendances :
+
+npm install @nestjs/mongoose mongoose
+
+agenda-backend/
+│
+├── src/
+│   ├── auth/          → utilisateurs / login
+│   ├── users/         → gestion utilisateurs
+│   ├── events/        → événements agenda
+│   ├── calendars/     → agendas multiples
+│   ├── app.module.ts
+│
+└── frontend/
+    ├── index.html
+    ├── calendar.js
+    └── fullcalendar/
+
+3.1 Installer Mongoose
+
+Dans agenda-backend :
+
+npm install @nestjs/mongoose mongoose
+3.2 Configurer la connexion MongoDB
+
+Ouvrez src/app.module.ts et remplacez le contenu par :
+4. Étape 2 – Création du module Users
+4.1 Générer le module
+nest g module users
+nest g service users
+nest g controller users
+
+2.1 Se placer au bon endroit
+
+Dans un nouveau terminal :
+
+cd C:\NestJs
+
+2.2 Créer le projet React
+npm create vite@latest agenda-frontend
+
+Répondez exactement :
+
+Framework : React
+
+Variant : TypeScript
+
+Ensuite :
+
+cd agenda-frontend
+npm install
+
+npm run dev
+
+http://localhost:5173/
+
+3. Installation de FullCalendar pour React
+
+Dans agenda-frontend :
+
+npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalend
+
+
+agenda-frontend/src/
+│
+├── components/
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│
+├── layouts/
+│   └── MainLayout.tsx
+│
+├── pages/
+│   ├── Home.tsx
+│   ├── Agenda.tsx
+│   ├── Members.tsx
+│   ├── Profile.tsx
+│   ├── Friends.tsx
+│   ├── Login.tsx
+│   └── Register.tsx
+│
+├── App.tsx
+└── main.tsx
+

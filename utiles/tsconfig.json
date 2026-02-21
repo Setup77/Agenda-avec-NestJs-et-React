@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    // "baseUrl": "./",
+    "incremental": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "composite": true,
+
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "bundler", // Utilisez 'bundler' au lieu de 'NodeNext' pour Vite
+    "skipLibCheck": true,
+
+    /* Sortie et Structure */
+    "outDir": "./dist",
+    "rootDir": "./", // Définit la racine au niveau du dossier projet
+    "sourceMap": true,
+
+    /* React */
+    "jsx": "react-jsx",
+
+    /* Strict */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "vite.config.ts"], // Inclut explicitement le fichier racine
+  "exclude": ["node_modules", "dist"]
+}
