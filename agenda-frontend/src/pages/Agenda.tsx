@@ -67,7 +67,9 @@ function Agenda() {
 
     const [targetUsername, setTargetUsername] = useState<string>("");
 
-    const API_URL = "http://localhost:3000"
+    // Utilisez la variable d'environnement en production, et localhost en développement
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 
     // =========================
     // STATE CALENDAR

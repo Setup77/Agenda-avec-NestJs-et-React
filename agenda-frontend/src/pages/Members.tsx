@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
+// ✅ Dynamic API URL configuration for production and local development
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 
 type Member = {
   _id: string
@@ -27,7 +30,8 @@ function Members() {
       setError("")
 
       try {
-        const res = await fetch("http://localhost:3000/users")
+        // ✅ Dynamized endpoint url
+        const res = await fetch(`${API_URL}/users`)
         const data = await res.json()
 
         if (!res.ok) throw new Error(data.message || "Erreur chargement users")
@@ -43,6 +47,7 @@ function Members() {
 
     loadMembers()
   }, [])
+
 
   // ✅ filtre recherche
   const filteredMembers = useMemo(() => {
@@ -73,20 +78,20 @@ function Members() {
   }, [filteredMembers, page, pageSize])
 
   // pages à afficher (ex: 1 2 3 4 5)
- const pagesToShow = useMemo(() => {
-  const maxButtons = 5
+  const pagesToShow = useMemo(() => {
+    const maxButtons = 5
 
-  let start = Math.max(1, page - 2)
-  const end = Math.min(totalPages, start + maxButtons - 1)
+    let start = Math.max(1, page - 2)
+    const end = Math.min(totalPages, start + maxButtons - 1)
 
-  // Ajuste start si on est en fin
-  start = Math.max(1, end - maxButtons + 1)
+    // Ajuste start si on est en fin
+    start = Math.max(1, end - maxButtons + 1)
 
-  const arr: number[] = []
-  for (let i = start; i <= end; i++) arr.push(i)
+    const arr: number[] = []
+    for (let i = start; i <= end; i++) arr.push(i)
 
-  return arr
-}, [page, totalPages])
+    return arr
+  }, [page, totalPages])
 
 
   if (loading) {
@@ -134,7 +139,7 @@ function Members() {
                 <div className="d-flex align-items-center gap-3">
                   {/* Avatar */}
                   <img
-                    src={`http://localhost:3000/uploads/avatars/${m.avatar}`}
+                    src={`${API_URL}/uploads/avatars/${m.avatar}`} // ✅ Dynamized asset path
                     alt="avatar"
                     className="rounded-circle border"
                     style={{
@@ -143,9 +148,10 @@ function Members() {
                       objectFit: "cover",
                     }}
                     onError={(e) => {
-                      ;(e.target as HTMLImageElement).src = "/img/default.jpg"
+                      (e.target as HTMLImageElement).src = "/img/default.jpg"
                     }}
                   />
+
 
                   {/* Infos */}
                   <div className="flex-grow-1">

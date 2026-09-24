@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { Toast, Modal } from "bootstrap"
 import { useAuth } from "../auth/useAuth"
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 
 
 type UserProfile = {
@@ -31,7 +33,7 @@ function Profile() {
   const location = useLocation()
   const navigate = useNavigate()
   const { id } = useParams()
-    // Debug : Ajoute ceci pour voir si l'ID est bien capturé
+  // Debug : Ajoute ceci pour voir si l'ID est bien capturé
   console.log("ID capturé par l'URL :", id);
   const { user, token } = useAuth()
 
@@ -97,8 +99,9 @@ function Profile() {
 
       try {
         const url = isPublicProfile
-          ? `http://localhost:3000/users/${id}`
-          : `http://localhost:3000/users/me`
+          ? `${API_URL}/users/${id}` // ✅ Dynamized
+          : `${API_URL}/users/me`    // ✅ Dynamized
+
 
         const headers: Record<string, string> = {}
 
@@ -172,7 +175,7 @@ function Profile() {
     try {
       const jwt = localStorage.getItem("token")
 
-      const res = await fetch("http://localhost:3000/users/me", {
+      const res = await fetch(`${API_URL}/users/me`, { // ✅ Dynamized
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -182,6 +185,7 @@ function Profile() {
           fullname: editFullname.trim(),
         }),
       })
+
 
       const data = await res.json()
 
@@ -206,13 +210,14 @@ function Profile() {
       const form = new FormData()
       form.append("avatar", selectedAvatarFile)
 
-      const res = await fetch("http://localhost:3000/users/me/avatar", {
+      const res = await fetch(`${API_URL}/users/me/avatar`, { // ✅ Dynamized
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
         body: form,
       })
+
 
       const data = await res.json()
 
@@ -318,11 +323,9 @@ function Profile() {
               {/* Avatar */}
               <div className="position-relative d-inline-block">
                 <img
-                  src={`http://localhost:3000/uploads/avatars/${profile.avatar}?t=${profile.updatedAt}`}
-
+                  src={`${API_URL}/uploads/avatars/${profile.avatar}?t=${profile.updatedAt}`} // ✅ Dynamized
                   onError={(e) => {
-                    ; (e.target as HTMLImageElement).src =
-                      "/img/default.jpg"
+                    (e.target as HTMLImageElement).src = "/img/default.jpg";
                   }}
                   alt="Avatar"
                   className="rounded-circle border shadow-sm"
@@ -332,6 +335,7 @@ function Profile() {
                     objectFit: "cover",
                   }}
                 />
+
 
                 {/* Pencil avatar */}
                 {isMyProfile && (

@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { useAuth } from "../auth/useAuth"
 import { Toast } from "bootstrap"
 
+// ✅ Utilisation de la variable d'environnement Vite en production, fallback sur localhost en dev
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function Login() {
   const navigate = useNavigate()
@@ -16,7 +18,8 @@ function Login() {
   })
 
   useEffect(() => {
-    fetch("http://localhost:3000/auth/csrf-token", { credentials: "include" })
+    // ✅ URL locale nettoyée et dynamisée
+    fetch(`${API_URL}/auth/csrf-token`, { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         setForm((prev) => ({ ...prev, csrfToken: data.csrfToken }))
@@ -47,7 +50,8 @@ function Login() {
     e.preventDefault()
     setErrors([])
 
-    const res = await fetch("http://localhost:3000/auth/login", {
+    // ✅ URL locale nettoyée et dynamisée
+    const res = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -71,9 +75,7 @@ function Login() {
   }
 
   return (
-
     <div className="row justify-content-center">
-
       <div
         className="toast-container position-fixed top-0 end-0 p-3"
         style={{ zIndex: 1080 }}

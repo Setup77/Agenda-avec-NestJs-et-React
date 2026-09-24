@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+
 function Register() {
   const [form, setForm] = useState({
     fullname: "",
@@ -29,9 +32,10 @@ function Register() {
 
   const loadCaptcha = async () => {
     try {
-      const res = await fetch("http://localhost:3000/auth/captcha", {
+      const res = await fetch(`${API_URL}/auth/captcha`, { // ✅ Dynamized
         credentials: "include",
       });
+
 
       if (!res.ok) throw new Error("Erreur serveur captcha");
 
@@ -51,9 +55,10 @@ function Register() {
   useEffect(() => {
     const loadCsrf = async () => {
       try {
-        const res = await fetch("http://localhost:3000/auth/csrf-token", {
+        const res = await fetch(`${API_URL}/auth/csrf-token`, { // ✅ Dynamized
           credentials: "include",
         });
+
 
         if (!res.ok) throw new Error();
 
@@ -128,12 +133,13 @@ function Register() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch(`${API_URL}/auth/register`, { // ✅ Dynamized
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+
 
       const data = await response.json();
 
@@ -238,9 +244,8 @@ function Register() {
                 <input
                   className={
                     touched["captcha"]
-                      ? `form-control ${
-                          isCaptchaValid ? "is-valid" : "is-invalid"
-                        }`
+                      ? `form-control ${isCaptchaValid ? "is-valid" : "is-invalid"
+                      }`
                       : "form-control"
                   }
                   name="captcha"
