@@ -27,6 +27,18 @@ interface RequestWithUser extends Request {
   user: { userId: string };
 }
 
+interface UploadedFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  destination: string;
+  filename: string;
+  path: string;
+  buffer?: Buffer;
+}
+
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -105,7 +117,7 @@ export class UsersController {
   )
   async uploadAvatar(
     @Req() req: RequestWithUser,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: UploadedFile,
   ) {
     if (!file) {
       throw new BadRequestException('Aucun fichier envoyé');
