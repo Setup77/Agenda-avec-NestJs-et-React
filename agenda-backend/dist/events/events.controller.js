@@ -18,7 +18,6 @@ const events_service_1 = require("./events.service");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const public_decorator_1 = require("../auth/public.decorator");
 let EventsController = class EventsController {
-    eventsService;
     constructor(eventsService) {
         this.eventsService = eventsService;
     }

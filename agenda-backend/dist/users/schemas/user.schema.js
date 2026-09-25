@@ -13,12 +13,6 @@ exports.UserSchema = exports.User = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let User = class User extends mongoose_2.Document {
-    fullname;
-    username;
-    email;
-    password;
-    isActive;
-    avatar;
 };
 exports.User = User;
 __decorate([

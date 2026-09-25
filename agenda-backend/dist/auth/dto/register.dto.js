@@ -12,13 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterDto = void 0;
 const class_validator_1 = require("class-validator");
 class RegisterDto {
-    fullname;
-    username;
-    email;
-    password;
-    confirmPassword;
-    captcha;
-    csrfToken;
 }
 exports.RegisterDto = RegisterDto;
 __decorate([

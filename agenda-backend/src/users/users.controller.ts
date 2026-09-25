@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 
 import type { Request } from 'express';
+import type { Multer } from 'multer';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 

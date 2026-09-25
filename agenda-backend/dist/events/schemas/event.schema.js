@@ -14,12 +14,6 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const user_schema_1 = require("../../users/schemas/user.schema");
 let Event = class Event {
-    title;
-    description;
-    start;
-    end;
-    user;
-    color;
 };
 exports.Event = Event;
 __decorate([
