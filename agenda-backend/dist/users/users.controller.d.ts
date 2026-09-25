@@ -1,4 +1,3 @@
-import { UploadedFile } from '@nestjs/common';
 import type { Request } from 'express';
 import { UsersService } from './users.service';
 import { UpdateProfileDto } from './dto/update-profile.dto';
@@ -7,7 +6,7 @@ interface RequestWithUser extends Request {
         userId: string;
     };
 }
-interface UploadedFile {
+interface MulterFile {
     fieldname: string;
     originalname: string;
     encoding: string;
@@ -43,7 +42,7 @@ export declare class UsersController {
     }> & {
         __v: number;
     }>;
-    uploadAvatar(req: RequestWithUser, file: UploadedFile): Promise<import("./schemas/user.schema").User & Required<{
+    uploadAvatar(req: RequestWithUser, file: MulterFile): Promise<import("./schemas/user.schema").User & Required<{
         _id: import("mongoose").Types.ObjectId;
     }> & {
         __v: number;
