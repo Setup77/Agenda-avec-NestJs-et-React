@@ -27,7 +27,8 @@ interface RequestWithUser extends Request {
   user: { userId: string };
 }
 
-interface UploadedFile {
+// ✅ Interface personnalisée locale pour contourner le namespace global Express de Multer
+interface MulterFile {
   fieldname: string;
   originalname: string;
   encoding: string;
@@ -117,7 +118,8 @@ export class UsersController {
   )
   async uploadAvatar(
     @Req() req: RequestWithUser,
-    @UploadedFile() file: UploadedFile,
+    // ✅ Utilisation stricte de l'interface locale sans faire référence au namespace Express
+    @UploadedFile() file: MulterFile,
   ) {
     if (!file) {
       throw new BadRequestException('Aucun fichier envoyé');
